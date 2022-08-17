@@ -3,7 +3,7 @@ import sys
 import socket
 
 
-ip = 'sys.argv' 
+ip = socket.gethostbyname(sys.argv[1])
 open_ports =[] 
 
 ports = range(1, 9999)
