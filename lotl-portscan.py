@@ -1,11 +1,37 @@
 #!/usr/bin/python3
+ 
+import sys
 import socket
-host = "1.1.1.1"
-portList = [21,22,53,80,443,3306,8443,8080]
-for port in portList:
- s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
- try:
-  s.connect((host,port))
-  print("Port ", port, " is open")
- except:
-  print("Port ", port, " is closed")
+
+
+ip = sys.argv[0] 
+open_ports =[] 
+
+ports = range(1, 9999)
+
+
+def probe_port(ip, port, result = 1): 
+  try: 
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM) 
+    sock.settimeout(0.5) 
+    r = sock.connect_ex((ip, port))   
+    if r == 0: 
+      result = r 
+    sock.close() 
+  except Exception as e: 
+    pass 
+  return result
+
+
+for port in ports: 
+    sys.stdout.flush() 
+    response = probe_port(ip, port) 
+    if response == 0: 
+        open_ports.append(port) 
+    
+
+if open_ports: 
+  print ("Open Ports: ") 
+  print (sorted(open_ports)) 
+else: 
+  print ("Nothing :(")
