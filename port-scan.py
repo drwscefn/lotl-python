@@ -1,10 +1,9 @@
-#!/usr/bin/python3
  
 import sys
 import socket
 
 
-ip = sys.argv[0] 
+ip = 'sys.argv' 
 open_ports =[] 
 
 ports = range(1, 9999)
@@ -31,7 +30,7 @@ for port in ports:
     
 
 if open_ports: 
-  print ("Open Ports: ") 
+  print ("Open Ports are: ") 
   print (sorted(open_ports)) 
 else: 
-  print ("Nothing :(")
+  print ("Looks like no ports are open :(")
